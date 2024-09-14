@@ -48,7 +48,11 @@ export default {
 
      this.chuckNorrisService.getJokesByCategory(category)
          .then(response =>{
-           this.jokes.push(response.data);
+
+           this.jokes.push(new Joke(response.data, category));
+
+           console.log("chistes de la api", this.jokes);
+
          })
          .catch(error =>{
            console.log("Error al cargar los chistes", error);
@@ -67,7 +71,7 @@ export default {
 
 <template>
 
-  <pv-card v-for="joke in jokes" :key="joke.id" style="width: 25rem; overflow: hidden; border: solid 4px"  >
+  <pv-card v-for="joke in jokes" :key="joke.id" style="width: 25rem; overflow: hidden; border: solid 4px; margin-bottom: 20px"  >
     <template #header>
       <img alt="user header" :src="joke.icon_url" />
     </template>
